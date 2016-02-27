@@ -6,7 +6,7 @@ public class Character extends Thing
    private boolean inAir=true;
    private double velY=0;
    private double velX=0;
-   private int damage=0;
+   private double damage=0;
    private boolean atkUp=false;
    private Hitbox atk;
    private int hitstun=0;
@@ -73,29 +73,32 @@ public class Character extends Thing
             break;
       }
    }
-   public double[] getAtkPow(int dir,boolean light)
+   public double[] getAtkPow(int dir,boolean light,boolean kBack)
    {
       if(light)
       {
-         if(dir==0)
+         switch(dir)
          {
-            return new double[]{-2,0};//up 2
-         }
-         if(dir==1)
-         {
-            return new double[]{-1,2};//up 1 right 2
-         }
-         if(dir==2)
-         {
-            return new double[]{2,0};//down 2
-         }
-         if(dir==3)
-         {
-            return new double[]{-1,-2};//up 1 left 2
-         }
-         if(dir==4)
-         {
-            return new double[]{-2,0};//up 2
+            case 0:
+               if(kBack)
+                  return new double[]{-2,0};//up 2
+               return new double[]{5};//5%
+            case 1:
+               if(kBack)
+                  return new double[]{-1,2};//up 1 right 2
+               return new double[]{5};//5%
+            case 2:
+               if(kBack)
+                  return new double[]{2,0};//down 2
+               return new double[]{5};//5%
+            case 3:
+               if(kBack)
+                  return new double[]{-1,-2};//up 1 left 2
+               return new double[]{5};//5%
+            case 4:
+               if(kBack)
+                  return new double[]{-2,0};//up 2
+               return new double[]{5};//5%
          }
       }
       return null;
@@ -172,5 +175,13 @@ public class Character extends Thing
    public void setInAir(boolean a)
    {
       inAir=a;
+   }
+   public double getDamage()
+   {
+      return damage;
+   }
+   public void addDamage(double d)
+   {
+      damage+=d;
    }
 }

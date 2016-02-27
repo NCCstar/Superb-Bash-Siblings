@@ -189,14 +189,17 @@ public class SBSPanel extends JPanel
                      {
                         if(plys[q].getHitstun()<=0)
                         {
-                           plys[q].setVelY(plys[q].getAtkPow(atks[i],true)[0]);
-                           plys[q].setVelX(plys[q].getAtkPow(atks[i],true)[1]);
+                           plys[q].setVelY(plys[q].getAtkPow(atks[i],true,true)[0]);
+                           plys[q].setVelX(plys[q].getAtkPow(atks[i],true,true)[1]);
+                           plys[q].addDamage(plys[q].getAtkPow(atks[i],true,false)[0]);
                            plys[q].setHitstun(50);
                         }
                      }
                   }
                }
             }
+            g.drawString(""+plys[0].getDamage(),getWidth()/3,getHeight());
+            g.drawString(""+plys[1].getDamage(),getWidth()*2/3,getHeight());
          }
       }
       else
