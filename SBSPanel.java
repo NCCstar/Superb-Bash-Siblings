@@ -83,11 +83,38 @@ public class SBSPanel extends JPanel
                      atks[0]=4;
                   }
       }
-      if(keyZe)
+      if(keyEn)
       {
          if(key8)
+         {
             plys[1].attackL(0);
+            atks[1]=0;
+         }
+         else
+            if(key6)
+            {
+               plys[1].attackL(1);
+               atks[1]=1;
+            }
+            else
+               if(key5)
+               {
+                  plys[1].attackL(2);
+                  atks[1]=2;
+               }
+               else
+                  if(key4)
+                  {
+                     plys[1].attackL(3);
+                     atks[1]=3;
+                  }
+                  else
+                  {
+                     plys[1].attackL(4);
+                     atks[1]=4;
+                  }
       }
+   
    }
    public void keyReleased(KeyEvent e)
    {
@@ -172,7 +199,8 @@ public class SBSPanel extends JPanel
                plys[i].getHitbox().offsetTo(getWidth()/2,100);//if off screen, reset
                plys[i].setVelY(0);
                plys[i].setVelX(0);
-               plys[i].setHitstun(1000);//respawn immunity
+               plys[i].addDamage(plys[i].getDamage()*-1);
+               plys[i].setHitstun(500);//respawn immunity
                //reduce life count
             }
             draw(g,rects);
@@ -198,6 +226,7 @@ public class SBSPanel extends JPanel
                   }
                }
             }
+            g.setColor(Color.black);
             g.drawString(""+plys[0].getDamage(),getWidth()/3,getHeight());
             g.drawString(""+plys[1].getDamage(),getWidth()*2/3,getHeight());
          }
@@ -251,9 +280,9 @@ public class SBSPanel extends JPanel
             break;
          case KeyEvent.VK_UP:key8=true;
             break;
-         case KeyEvent.VK_0:keyZe=true;
+         case KeyEvent.VK_CONTROL:keyEn=true;
             break;
-         case KeyEvent.VK_ENTER:keyEn=true;
+         case KeyEvent.VK_ENTER:keyZe=true;
             break;
          default: 
             break;
@@ -284,10 +313,10 @@ public class SBSPanel extends JPanel
             break;
          case KeyEvent.VK_UP:key8=false;
             break;
-         case KeyEvent.VK_0:keyZe=false;
+         case KeyEvent.VK_CONTROL:keyEn=false;
             plys[1].attackL(5);
             break;
-         case KeyEvent.VK_ENTER:keyEn=false;
+         case KeyEvent.VK_ENTER:keyZe=false;
             break;
          default: 
             break;
