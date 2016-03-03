@@ -90,7 +90,7 @@ public class Character extends Thing
             case 2:
                if(kBack)
                   return new double[]{2,0};//down 2
-               return new double[]{5};//5%
+               return new double[]{10};//10%
             case 3:
                if(kBack)
                   return new double[]{-1,-2};//up 1 left 2
