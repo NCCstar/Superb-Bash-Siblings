@@ -8,7 +8,7 @@ public class SBSDriver
    {
       panel = new SBSPanel();
       JFrame frame = new JFrame("Superb Bash Siblings");
-      frame.setSize(1200, 1000);
+      frame.setSize(1000, 1000);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setContentPane(panel);
       frame.setVisible(true);

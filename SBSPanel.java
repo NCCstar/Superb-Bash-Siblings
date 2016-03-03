@@ -56,30 +56,30 @@ public class SBSPanel extends JPanel
       {
          if(keyW)
          {
-            plys[0].attackL(0);
+            plys[0].attack(0,true);
             atks[0]=0;
          }
          else
             if(keyD)
             {
-               plys[0].attackL(1);
+               plys[0].attack(1,true);
                atks[0]=1;
             }
             else
                if(keyS)
                {
-                  plys[0].attackL(2);
+                  plys[0].attack(2,true);
                   atks[0]=2;
                }
                else
                   if(keyA)
                   {
-                     plys[0].attackL(3);
+                     plys[0].attack(3,true);
                      atks[0]=3;
                   }
                   else
                   {
-                     plys[0].attackL(4);
+                     plys[0].attack(4,true);
                      atks[0]=4;
                   }
       }
@@ -87,30 +87,30 @@ public class SBSPanel extends JPanel
       {
          if(key8)
          {
-            plys[1].attackL(0);
+            plys[1].attack(0,true);
             atks[1]=0;
          }
          else
             if(key6)
             {
-               plys[1].attackL(1);
+               plys[1].attack(1,true);
                atks[1]=1;
             }
             else
                if(key5)
                {
-                  plys[1].attackL(2);
+                  plys[1].attack(2,true);
                   atks[1]=2;
                }
                else
                   if(key4)
                   {
-                     plys[1].attackL(3);
+                     plys[1].attack(3,true);
                      atks[1]=3;
                   }
                   else
                   {
-                     plys[1].attackL(4);
+                     plys[1].attack(4,true);
                      atks[1]=4;
                   }
       }
@@ -301,7 +301,7 @@ public class SBSPanel extends JPanel
          case KeyEvent.VK_D:keyD=false;
             break;
          case KeyEvent.VK_SPACE:keySp=false;
-            plys[0].attackL(5);
+            plys[0].attack(5,true);
             break;
          case KeyEvent.VK_SHIFT:keySh=false;
             break;
@@ -314,7 +314,7 @@ public class SBSPanel extends JPanel
          case KeyEvent.VK_UP:key8=false;
             break;
          case KeyEvent.VK_CONTROL:keyEn=false;
-            plys[1].attackL(5);
+            plys[1].attack(5,true);
             break;
          case KeyEvent.VK_ENTER:keyZe=false;
             break;

@@ -42,35 +42,42 @@ public class Character extends Thing
       }
       return ans;
    }
-   public void attackL(int dir)
+   public void attack(int dir,boolean light)
    {
       Rect rect=hitbox.getBoxes()[0];
-      switch(dir)
+      if(light)
       {
-         case 0://different for each fighter
-            atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getTop()-rect.getHeight(),rect.getRight(),rect.getTop())},"atk");
-            atkUp=true;
-            break;
-         case 1:
-            atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop(),rect.getRight()+rect.getWidth(),rect.getBottom())},"atk");
-            atkUp=true;
-            break;
-         case 2:
-            atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getBottom(),rect.getRight(),rect.getBottom()+rect.getHeight())},"atk");
-            atkUp=true;
-            break;
-         case 3:
-            atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-rect.getWidth(),rect.getTop(),rect.getLeft(),rect.getBottom())},"atk");
-            atkUp=true;
-            break;
-         case 4:
-            atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-rect.getWidth()/4,rect.getTop()-rect.getHeight()/4,rect.getRight()+rect.getWidth()/4,rect.getBottom()+rect.getHeight()/4)},"atk");
-            atkUp=true;
-            break;
-         default: 
-            atk=null;
-            atkUp=false;
-            break;
+         switch(dir)
+         {
+            case 0://different for each fighter
+               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getTop()-rect.getHeight(),rect.getRight(),rect.getTop())},"atk");
+               atkUp=true;
+               break;
+            case 1:
+               atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop(),rect.getRight()+rect.getWidth(),rect.getBottom())},"atk");
+               atkUp=true;
+               break;
+            case 2:
+               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getBottom()+1,rect.getRight(),rect.getBottom()+rect.getHeight()+1)},"atk");
+               atkUp=true;
+               break;
+            case 3:
+               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-rect.getWidth(),rect.getTop(),rect.getLeft(),rect.getBottom())},"atk");
+               atkUp=true;
+               break;
+            case 4:
+               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-rect.getWidth()/4,rect.getTop()-rect.getHeight()/4,rect.getRight()+rect.getWidth()/4,rect.getBottom()+rect.getHeight()/4)},"atk");
+               atkUp=true;
+               break;
+            default: 
+               atk=null;
+               atkUp=false;
+               break;
+         }
+      }
+      else
+      {
+         
       }
    }
    public double[] getAtkPow(int dir,boolean light,boolean kBack)
@@ -101,8 +108,13 @@ public class Character extends Thing
                return new double[]{5};//5%
          }
       }
+      else
+      {
+      
+      }
       return null;
    }
+   
    public Hitbox getAtk()
    {
       return atk;
