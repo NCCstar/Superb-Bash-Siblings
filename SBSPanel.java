@@ -83,6 +83,38 @@ public class SBSPanel extends JPanel
                      atks[0]=4;
                   }
       }
+      if(keySh)
+      {
+         if(keyW)
+         {
+            plys[0].attack(0,false);
+            atks[0]=0;
+         }
+         else
+            if(keyD)
+            {
+               plys[0].attack(1,false);
+               atks[0]=1;
+            }
+            else
+               if(keyS)
+               {
+                  plys[0].attack(2,false);
+                  atks[0]=2;
+               }
+               else
+                  if(keyA)
+                  {
+                     plys[0].attack(3,false);
+                     atks[0]=3;
+                  }
+                  else
+                  {
+                     plys[0].attack(4,false);
+                     atks[0]=4;
+                  }
+      }
+   
       if(keyEn)
       {
          if(key8)
@@ -110,7 +142,7 @@ public class SBSPanel extends JPanel
                   }
                   else
                   {
-                     plys[1].attack(4,true);
+                     plys[1].attack (4,true);
                      atks[1]=4;
                   }
       }
@@ -196,7 +228,7 @@ public class SBSPanel extends JPanel
             int buffer=50;//buffer space for offscreen blast lines
             if(plys[i].centerX()<buffer*-1||plys[i].centerX()>getWidth()+buffer||plys[i].centerY()<buffer*-1||plys[i].centerY()>getHeight()+buffer)
             {//check blast lines
-               plys[i].getHitbox().offsetTo(getWidth()/2,100);//if off screen, reset
+               plys[i].getHitbox().offsetTo(getWidth()/2,500);//if off screen, reset
                plys[i].setVelY(0);
                plys[i].setVelX(0);
                plys[i].addDamage(plys[i].getDamage()*-1);
@@ -217,9 +249,18 @@ public class SBSPanel extends JPanel
                      {
                         if(plys[q].getHitstun()<=0)
                         {
-                           plys[q].setVelY(plys[q].getAtkPow(atks[i],true,true)[0]*plys[q].getDamage()/30);
-                           plys[q].setVelX(plys[q].getAtkPow(atks[i],true,true)[1]*plys[q].getDamage()/30);
-                           plys[q].addDamage(plys[q].getAtkPow(atks[i],true,false)[0]);
+                           if(i==0)
+                           {
+                           plys[q].setVelY(plys[q].getAtkPow(atks[i],keySp,true)[0]*plys[q].getDamage()/30);
+                           plys[q].setVelX(plys[q].getAtkPow(atks[i],keySp,true)[1]*plys[q].getDamage()/30);
+                           plys[q].addDamage(plys[q].getAtkPow(atks[i],keySp,false)[0]);
+                           }
+                           else
+                           {
+                           plys[q].setVelY(plys[q].getAtkPow(atks[i],keyEn,true)[0]*plys[q].getDamage()/30);
+                           plys[q].setVelX(plys[q].getAtkPow(atks[i],keyEn,true)[1]*plys[q].getDamage()/30);
+                           plys[q].addDamage(plys[q].getAtkPow(atks[i],keyEn,false)[0]);
+                           }
                            plys[q].setHitstun(50);
                         }
                      }
@@ -304,6 +345,7 @@ public class SBSPanel extends JPanel
             plys[0].attack(5,true);
             break;
          case KeyEvent.VK_SHIFT:keySh=false;
+            plys[0].attack(5,false);
             break;
          case KeyEvent.VK_LEFT:key4=false;
             break;

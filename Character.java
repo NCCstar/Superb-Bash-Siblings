@@ -77,7 +77,34 @@ public class Character extends Thing
       }
       else
       {
-         
+         switch(dir)
+         {
+            case 0://different for each fighter
+               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getTop()-rect.getHeight()*1.3,rect.getRight(),rect.getTop())},"atk");
+               atkUp=true;
+               break;
+            case 1:
+               atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop(),rect.getRight()+rect.getWidth()*1.3,rect.getBottom())},"atk");
+               atkUp=true;
+               break;
+            case 2:
+               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getBottom()+1,rect.getRight(),rect.getBottom()+rect.getHeight()*1.3+1)},"atk");
+               atkUp=true;
+               break;
+            case 3:
+               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-rect.getWidth()*1.3,rect.getTop(),rect.getLeft(),rect.getBottom())},"atk");
+               atkUp=true;
+               break;
+            case 4:
+               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-rect.getWidth()/4,rect.getTop()-rect.getHeight()/4,rect.getRight()+rect.getWidth()/4,rect.getBottom()+rect.getHeight()/4)},"atk");
+               atkUp=true;
+               break;
+            default: 
+               atk=null;
+               atkUp=false;
+               break;
+         }
+            
       }
    }
    public double[] getAtkPow(int dir,boolean light,boolean kBack)
@@ -88,29 +115,51 @@ public class Character extends Thing
          {
             case 0:
                if(kBack)
-                  return new double[]{-2,0};//up 2
-               return new double[]{5};//5%
+                  return new double[]{-1.5,0};//up 1.5
+               return new double[]{6};//5%
             case 1:
                if(kBack)
-                  return new double[]{-1,2};//up 1 right 2
-               return new double[]{5};//5%
+                  return new double[]{-.5,1.5};//up .5 right 1.5
+               return new double[]{7};//5%
             case 2:
                if(kBack)
-                  return new double[]{2,0};//down 2
-               return new double[]{10};//10%
+                  return new double[]{1.5,0};//down 1.5
+               return new double[]{11};//10%
             case 3:
                if(kBack)
-                  return new double[]{-1,-2};//up 1 left 2
-               return new double[]{5};//5%
+                  return new double[]{-.5,-1.5};//up .5 left 1.5
+               return new double[]{7};//5%
             case 4:
                if(kBack)
-                  return new double[]{-2,0};//up 2
+                  return new double[]{-1.5,0};//up 1.5
                return new double[]{5};//5%
          }
       }
       else
       {
-      
+         switch(dir)
+         {
+            case 0:
+               if(kBack)
+                  return new double[]{-3,0};//up 3
+               return new double[]{2};//5%
+            case 1:
+               if(kBack)
+                  return new double[]{-1,3};//up 1 right 3
+               return new double[]{3};//5%
+            case 2:
+               if(kBack)
+                  return new double[]{5,0};//down 5
+               return new double[]{5};//10%
+            case 3:
+               if(kBack)
+                  return new double[]{-1,-3};//up 1 left 3
+               return new double[]{3};//5%
+            case 4:
+               if(kBack)
+                  return new double[]{-3,0};//up 3
+               return new double[]{1};//5%
+         }
       }
       return null;
    }
