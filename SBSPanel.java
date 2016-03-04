@@ -313,17 +313,17 @@ public class SBSPanel extends JPanel
             break;
          case KeyEvent.VK_SHIFT:keySh=true;
             break;
-         case KeyEvent.VK_LEFT:key4=true;
+         case KeyEvent.VK_NUMPAD4:key4=true;
             break;
-         case KeyEvent.VK_DOWN:key5=true;
+         case KeyEvent.VK_NUMPAD5:key5=true;
             break;
-         case KeyEvent.VK_RIGHT:key6=true;
+         case KeyEvent.VK_NUMPAD6:key6=true;
             break;
-         case KeyEvent.VK_UP:key8=true;
+         case KeyEvent.VK_NUMPAD8:key8=true;
             break;
-         case KeyEvent.VK_CONTROL:keyEn=true;
+         case KeyEvent.VK_ENTER:keyEn=true;
             break;
-         case KeyEvent.VK_ENTER:keyZe=true;
+         case KeyEvent.VK_NUMPAD0:keyZe=true;
             break;
          default: 
             break;
