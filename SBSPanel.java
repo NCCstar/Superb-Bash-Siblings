@@ -16,18 +16,18 @@ public class SBSPanel extends JPanel
    private boolean keyEn=false;
    private boolean keyZe=false;
       
-   int atks[]=new int[2];
-   int deaths[]=new int[2];
+   private int atks[]=new int[2];
+   private int deaths[]=new int[2];
    
-   long time=System.currentTimeMillis();
+   private long time=System.currentTimeMillis();
    
    private Level level=new Level();
    private Character[] plys=new Character[2];
    
    public SBSPanel()
    {
-      plys[0]=new GKoops(300,100);
-      plys[1]=new Little_Mac(700,100);
+      plys[0]=new Megaman(300,100);
+      plys[1]=new Spidey(700,100);
       atks[0]=5;
       atks[1]=5;
    }
@@ -399,10 +399,12 @@ public class SBSPanel extends JPanel
          case KeyEvent.VK_D:keyD=false;
             break;
          case KeyEvent.VK_SPACE:keySp=false;
-            plys[0].attack(5,true);
+            if(atks[0]!=1||atks[1]!=3)
+               plys[0].attack(5,true);
             break;
          case KeyEvent.VK_SHIFT:keySh=false;
-            plys[0].attack(5,false);
+            if(atks[0]!=1||atks[1]!=3)
+               plys[0].attack(5,false);
             break;
          case KeyEvent.VK_NUMPAD4:key4=false;
             break;

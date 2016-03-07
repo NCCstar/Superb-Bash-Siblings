@@ -7,14 +7,19 @@ public abstract class Character extends Thing
    private double velY=0;
    private double velX=0;
    private double damage=0;
-   private boolean atkUp=false;
-   private Hitbox atk;
+   protected boolean atkUp=false;
+   protected Hitbox atk;
    private int hitstun=0;
    protected double weight;
+   protected int atkDir=5;
    public Character(int x,int y,int xDim,int yDim)
    {
       super(new Hitbox(new Rect[]{new Rect(x-xDim/2,y-yDim,x+xDim/2,y)},"char"));
       weight=100;
+   }
+   public int getAtkDir()
+   {
+      return atkDir;
    }
    public double centerX()
    {
@@ -58,26 +63,32 @@ public abstract class Character extends Thing
             case 0://different for each fighter
                atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getTop()-rect.getHeight(),rect.getRight(),rect.getTop())},"atk");
                atkUp=true;
+               atkDir=0;
                break;
             case 1:
                atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop(),rect.getRight()+rect.getWidth(),rect.getBottom())},"atk");
                atkUp=true;
+               atkDir=1;
                break;
             case 2:
                atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getBottom()+1,rect.getRight(),rect.getBottom()+rect.getHeight()+1)},"atk");
                atkUp=true;
+               atkDir=2;
                break;
             case 3:
                atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-rect.getWidth(),rect.getTop(),rect.getLeft(),rect.getBottom())},"atk");
                atkUp=true;
+               atkDir=3;
                break;
             case 4:
                atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-rect.getWidth()/4,rect.getTop()-rect.getHeight()/4,rect.getRight()+rect.getWidth()/4,rect.getBottom()+rect.getHeight()/4)},"atk");
                atkUp=true;
+               atkDir=4;
                break;
             default: 
                atk=null;
                atkUp=false;
+               atkDir=5;
                break;
          }
       }

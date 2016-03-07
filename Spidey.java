@@ -1,6 +1,6 @@
-public class Little_Mac extends Character
+public class Spidey extends Character
 {
-   public Little_Mac(int x,int y)
+   public Spidey(int x,int y)
    {
       super(x,y,20,20);
       weight=110;
