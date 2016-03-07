@@ -1,18 +1,18 @@
-public class GKoops extends Character
+public class Little_Mac extends Character
 {
-   public GKoops(int x,int y)
+   public Little_Mac(int x,int y)
    {
-      super(x,y,40,40);
-      weight=200;
+      super(x,y,20,20);
+      weight=110;
    }
    public void jump()
    {
       this.setInAir(true);
-      this.setVelY(-1);
+      this.setVelY(-1.6);
    }
    public void step(boolean right)
    {
-      double off=.03;
+      double off=.04;
       if(!right)
       {
          off*=-1;

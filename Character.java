@@ -1,4 +1,4 @@
-public class Character extends Thing
+public abstract class Character extends Thing
 {
    public double getGrav(){
       return (double).007;}
@@ -198,15 +198,8 @@ public class Character extends Thing
    {
       this.velX=vel;
    }
-   public void step(boolean right)
-   {
-      double off=(double)(.033);
-      if(!right)
-      {
-         off*=-1;
-      }
-      velX+=off;
-   }
+   public abstract void step(boolean right);
+
    public void fall()
    {
       velY+=getGrav();

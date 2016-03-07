@@ -27,7 +27,7 @@ public class SBSPanel extends JPanel
    public SBSPanel()
    {
       plys[0]=new GKoops(300,100);
-      plys[1]=new Character(700,100,20,20);
+      plys[1]=new Little_Mac(700,100);
       atks[0]=5;
       atks[1]=5;
    }
@@ -119,37 +119,6 @@ public class SBSPanel extends JPanel
       {
          if(key8)
          {
-            plys[1].attack(0,true);
-            atks[1]=0;
-         }
-         else
-            if(key6)
-            {
-               plys[1].attack(1,true);
-               atks[1]=1;
-            }
-            else
-               if(key5)
-               {
-                  plys[1].attack(2,true);
-                  atks[1]=2;
-               }
-               else
-                  if(key4)
-                  {
-                     plys[1].attack(3,true);
-                     atks[1]=3;
-                  }
-                  else
-                  {
-                     plys[1].attack (4,true);
-                     atks[1]=4;
-                  }
-      }
-      if(keyZe)
-      {
-         if(key8)
-         {
             plys[1].attack(0,false);
             atks[1]=0;
          }
@@ -177,6 +146,37 @@ public class SBSPanel extends JPanel
                      atks[1]=4;
                   }
       }
+      if(keyZe)
+      {
+         if(key8)
+         {
+            plys[1].attack(0,true);
+            atks[1]=0;
+         }
+         else
+            if(key6)
+            {
+               plys[1].attack(1,true);
+               atks[1]=1;
+            }
+            else
+               if(key5)
+               {
+                  plys[1].attack(2,true);
+                  atks[1]=2;
+               }
+               else
+                  if(key4)
+                  {
+                     plys[1].attack(3,true);
+                     atks[1]=3;
+                  }
+                  else
+                  {
+                     plys[1].attack (4,true);
+                     atks[1]=4;
+                  }
+      }
    }
    public void keyReleased(KeyEvent e)
    {
@@ -193,7 +193,7 @@ public class SBSPanel extends JPanel
          g.setColor(Color.black);
          draw(g,level.walls);//floor
          g.setColor(Color.black);
-         if(Math.random()<Math.random())//random framerate
+         if(Math.random()!=Math.random())//random framerate
          {
             moveCheck();//check keys
             for(int i=0;i<plys.length;i++)
@@ -290,9 +290,9 @@ public class SBSPanel extends JPanel
                               }
                               else
                               {
-                                 plys[q].setVelY(plys[q].getAtkPow(atks[i],keyEn,true)[0]*plys[q].getDamage()/30/plys[q].getWeight()*100);
-                                 plys[q].setVelX(plys[q].getAtkPow(atks[i],keyEn,true)[1]*plys[q].getDamage()/30/plys[q].getWeight()*100);
-                                 plys[q].addDamage(plys[q].getAtkPow(atks[i],keyEn,false)[0]);
+                                 plys[q].setVelY(plys[q].getAtkPow(atks[i],keyZe,true)[0]*plys[q].getDamage()/30/plys[q].getWeight()*100);
+                                 plys[q].setVelX(plys[q].getAtkPow(atks[i],keyZe,true)[1]*plys[q].getDamage()/30/plys[q].getWeight()*100);
+                                 plys[q].addDamage(plys[q].getAtkPow(atks[i],keyZe,false)[0]);
                               }
                               plys[q].setHitstun(50);
                            }
@@ -413,10 +413,10 @@ public class SBSPanel extends JPanel
          case KeyEvent.VK_NUMPAD8:key8=false;
             break;
          case KeyEvent.VK_ENTER:keyEn=false;
-            plys[1].attack(5,true);
+            plys[1].attack(5,false);
             break;
          case KeyEvent.VK_NUMPAD0:keyZe=false;
-            plys[1].attack(5,false);
+            plys[1].attack(5,true);
             break;
          default: 
             break;
