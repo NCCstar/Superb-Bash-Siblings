@@ -10,9 +10,11 @@ public class Character extends Thing
    private boolean atkUp=false;
    private Hitbox atk;
    private int hitstun=0;
-   public Character(int x,int y)
+   protected double weight;
+   public Character(int x,int y,int xDim,int yDim)
    {
-      super(new Hitbox(new Rect[]{new Rect(x-10,y-20,x+10,y)},"char"));
+      super(new Hitbox(new Rect[]{new Rect(x-xDim/2,y-yDim,x+xDim/2,y)},"char"));
+      weight=100;
    }
    public double centerX()
    {
@@ -23,6 +25,10 @@ public class Character extends Thing
          ans+=boxes[i].centerX();
       }
       return ans;
+   }
+   public double getWeight()
+   {
+      return weight;
    }
    public int getHitstun()
    {
