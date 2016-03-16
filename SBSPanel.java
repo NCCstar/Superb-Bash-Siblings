@@ -27,7 +27,7 @@ public class SBSPanel extends JPanel
    public SBSPanel()
    {
       plys[0]=new Megaman(300,100);
-      plys[1]=new Spidey(700,100);
+      plys[1]=new GKoops(700,100);
       atks[0]=5;
       atks[1]=5;
    }
@@ -193,7 +193,7 @@ public class SBSPanel extends JPanel
          g.setColor(Color.black);
          draw(g,level.walls);//floor
          g.setColor(Color.black);
-         if(Math.random()!=Math.random())//random framerate
+         if(Math.random()<=Math.random())//random framerate
          {
             moveCheck();//check keys
             for(int i=0;i<plys.length;i++)

@@ -32,7 +32,7 @@ public class Megaman extends Character
                atkDir=0;
                break;
             case 1:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop(),rect.getRight()+rect.getWidth(),rect.getBottom())},"atk");
+               atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop()+10,rect.getRight()+200,rect.getBottom()-10)},"atk");
                atkUp=true;
                atkDir=1;
                break;
@@ -42,7 +42,7 @@ public class Megaman extends Character
                atkDir=2;
                break;
             case 3:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-rect.getWidth(),rect.getTop(),rect.getLeft(),rect.getBottom())},"atk");
+               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-200,rect.getTop()+10,rect.getLeft(),rect.getBottom()-10)},"atk");
                atkUp=true;
                atkDir=3;
                break;
@@ -67,7 +67,7 @@ public class Megaman extends Character
                atkUp=true;
                break;
             case 1:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop(),rect.getRight()+rect.getWidth(),rect.getBottom())},"atk");
+               atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop()+10,rect.getRight()+900,rect.getBottom()-10)},"atk");
                atkUp=true;
                break;
             case 2:
@@ -75,7 +75,7 @@ public class Megaman extends Character
                atkUp=true;
                break;
             case 3:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-rect.getWidth(),rect.getTop(),rect.getLeft(),rect.getBottom())},"atk");
+               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-200,rect.getTop()+10,rect.getLeft(),rect.getBottom()-10)},"atk");
                atkUp=true;
                break;
             case 4:
@@ -102,16 +102,16 @@ public class Megaman extends Character
                return new double[]{4.6};//5%
             case 1:
                if(kBack)
-                  return new double[]{-.5,1.5};//up .5 right 1.5
-               return new double[]{6};//5%
+                  return new double[]{0.5,0};//up 0 right .5
+               return new double[]{1};//1%
             case 2:
                if(kBack)
                   return new double[]{1.5,0};//down 1.5
                return new double[]{11};//10%
             case 3:
                if(kBack)
-                  return new double[]{-.5,-1.5};//up .5 left 1.5
-               return new double[]{6};//5%
+                  return new double[]{-0.5,0};//up 0 left .5
+               return new double[]{1};//1%
             case 4:
                if(kBack)
                   return new double[]{-1,0};//up 1
@@ -128,16 +128,16 @@ public class Megaman extends Character
                return new double[]{2};//5%
             case 1:
                if(kBack)
-                  return new double[]{-.5,2.5};//up .5 right 2.5
-               return new double[]{3};//5%
+                  return new double[]{.5,0};//down .5 right 0
+               return new double[]{0.1};//5%
             case 2:
                if(kBack)
                   return new double[]{5,0};//down 5
                return new double[]{5};//10%
             case 3:
                if(kBack)
-                  return new double[]{-.5,-2.5};//up .5 left 2.5
-               return new double[]{3};//5%
+                  return new double[]{.5,0};//down .5 left 0
+               return new double[]{0.1};//5%
             case 4:
                if(kBack)
                   return new double[]{-2,0};//up 2
@@ -148,10 +148,6 @@ public class Megaman extends Character
    }
    public boolean getAtkUp()
    {
-      if(getAtkDir()==1)
-         atk.offset(100,0);
-      if(getAtkDir()==3)
-         atk.offset(-100,0);
       return atkUp;
    }
 }
