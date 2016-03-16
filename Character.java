@@ -71,7 +71,7 @@ public abstract class Character extends Thing
                atkDir=1;
                break;
             case 2:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getBottom()+1,rect.getRight(),rect.getBottom()+rect.getHeight()+1)},"atk");
+               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getBottom()-1,rect.getRight(),rect.getBottom()+rect.getHeight()+1)},"atk");
                atkUp=true;
                atkDir=2;
                break;

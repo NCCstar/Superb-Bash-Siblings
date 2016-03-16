@@ -12,7 +12,7 @@ public class GKoops extends Character
    }
    public void step(boolean right)
    {
-      double off=.03;
+      double off=.025;
       if(!right)
       {
          off*=-1;

@@ -27,12 +27,12 @@ public class Megaman extends Character
          switch(dir)
          {
             case 0://different for each fighter
-               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getTop()-rect.getHeight(),rect.getRight(),rect.getTop())},"atk");
+               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-15,rect.getTop()-30,rect.getRight()+15,rect.getTop())},"atk");
                atkUp=true;
                atkDir=0;
                break;
             case 1:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop()+10,rect.getRight()+200,rect.getBottom()-10)},"atk");
+               atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop()+10,rect.getRight()+500,rect.getBottom()-10)},"atk");
                atkUp=true;
                atkDir=1;
                break;
@@ -42,7 +42,7 @@ public class Megaman extends Character
                atkDir=2;
                break;
             case 3:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-200,rect.getTop()+10,rect.getLeft(),rect.getBottom()-10)},"atk");
+               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-500,rect.getTop()+10,rect.getLeft(),rect.getBottom()-10)},"atk");
                atkUp=true;
                atkDir=3;
                break;
@@ -67,7 +67,7 @@ public class Megaman extends Character
                atkUp=true;
                break;
             case 1:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop()+10,rect.getRight()+200,rect.getBottom()-10)},"atk");
+               atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop()+10,rect.getRight()+500,rect.getBottom()-10)},"atk");
                atkUp=true;
                break;
             case 2:
@@ -75,7 +75,7 @@ public class Megaman extends Character
                atkUp=true;
                break;
             case 3:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-200,rect.getTop()+10,rect.getLeft(),rect.getBottom()-10)},"atk");
+               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-500,rect.getTop()+10,rect.getLeft(),rect.getBottom()-10)},"atk");
                atkUp=true;
                break;
             case 4:
@@ -103,7 +103,7 @@ public class Megaman extends Character
             case 1:
                if(kBack)
                   return new double[]{-0.5,0};//up 0 right .5
-               return new double[]{1};//1%
+               return new double[]{.75};//1%
             case 2:
                if(kBack)
                   return new double[]{1.5,0};//down 1.5
