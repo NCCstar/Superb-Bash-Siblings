@@ -67,7 +67,7 @@ public class Megaman extends Character
                atkUp=true;
                break;
             case 1:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop()+10,rect.getRight()+900,rect.getBottom()-10)},"atk");
+               atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop()+10,rect.getRight()+200,rect.getBottom()-10)},"atk");
                atkUp=true;
                break;
             case 2:
@@ -102,7 +102,7 @@ public class Megaman extends Character
                return new double[]{4.6};//5%
             case 1:
                if(kBack)
-                  return new double[]{0.5,0};//up 0 right .5
+                  return new double[]{-0.5,0};//up 0 right .5
                return new double[]{1};//1%
             case 2:
                if(kBack)
