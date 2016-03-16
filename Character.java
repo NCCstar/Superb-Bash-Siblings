@@ -105,7 +105,7 @@ public abstract class Character extends Thing
                atkUp=true;
                break;
             case 2:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getBottom()+1,rect.getRight(),rect.getBottom()+rect.getHeight()+1)},"atk");
+               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getBottom()-1,rect.getRight(),rect.getBottom()+rect.getHeight()+1)},"atk");
                atkUp=true;
                break;
             case 3:
@@ -209,7 +209,15 @@ public abstract class Character extends Thing
    {
       this.velX=vel;
    }
-   public abstract void step(boolean right);
+   public void step(boolean right)
+   {
+      double off=.03;
+      if(!right)
+      {
+         off*=-1;
+      }
+      setVelX(getVelX()+off);
+   }
 
    public void fall()
    {

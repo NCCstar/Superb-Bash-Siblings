@@ -10,15 +10,6 @@ public class Megaman extends Character
       this.setInAir(true);
       this.setVelY(-1.4);
    }
-   public void step(boolean right)
-   {
-      double off=.03;
-      if(!right)
-      {
-         off*=-1;
-      }
-      setVelX(getVelX()+off);
-   }
    public void attack(int dir,boolean light)
    {
       Rect rect=hitbox.getBoxes()[0];
