@@ -93,7 +93,7 @@ public class Megaman extends Character
                return new double[]{4.6};//5%
             case 1:
                if(kBack)
-                  return new double[]{-0.5,0};//up 0 right .5
+                  return new double[]{-0.1,0};//up 0 right .5
                return new double[]{.75};//1%
             case 2:
                if(kBack)
@@ -101,7 +101,7 @@ public class Megaman extends Character
                return new double[]{11};//10%
             case 3:
                if(kBack)
-                  return new double[]{-0.5,0};//up 0 left .5
+                  return new double[]{-0.1,0};//up 0 left .5
                return new double[]{1};//1%
             case 4:
                if(kBack)
