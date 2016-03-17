@@ -21,12 +21,14 @@ public class SBSPanel extends JPanel
    private int deaths[]=new int[2];
    
    private long time=System.currentTimeMillis();
+   private double FPS=30;
    
    private Level level=new Level();
    private Character[] plys=new Character[2];
    
    public SBSPanel()
    {
+      FPS=1/FPS*1000;
       String chars = "1. Spidey\n2. Megaman\n3. GKoops\n4. Meteor";
       for(int i=0;i<2;i++)
       {
@@ -200,154 +202,125 @@ public class SBSPanel extends JPanel
    public void paintComponent(Graphics g)
    {
       super.paintComponent(g);
-      if(true)//time+200>System.currentTimeMillis())//fps regulation
+      time=System.currentTimeMillis();
+      g.setColor(Color.white);
+      g.fillRect(0,0,getWidth(),getHeight());//background
+      g.setColor(Color.black);
+      draw(g,level.walls);//floor
+      g.setColor(Color.black);
+      moveCheck();//check keys
+      for(int i=0;i<plys.length;i++)
       {
-         time=System.currentTimeMillis();
-         g.setColor(Color.white);
-         g.fillRect(0,0,getWidth(),getHeight());//background
-         g.setColor(Color.black);
-         draw(g,level.walls);//floor
-         g.setColor(Color.black);
-         if(Math.random()!=Math.random())//random framerate :-)
+         int hitstun=plys[i].getHitstun();
+         if(hitstun>0)
+         {//increment hitstun
+            plys[i].subHitstun();
+         }
+         switch(i)//color based on player number
          {
-            moveCheck();//check keys
-            for(int i=0;i<plys.length;i++)
-            {
-               int hitstun=plys[i].getHitstun();
-               if(hitstun>0)
-               {//increment hitstun
-                  plys[i].subHitstun();
-               }
-               switch(i)//color based on player number
-               {
-                  case 0:g.setColor(Color.red);
-                     break;
-                  case 1:g.setColor(Color.blue);
-                     break;
-                  default:g.setColor(Color.black);
-                     break;
-               }
-               if(hitstun>0)
-               {
-                  Color a=g.getColor();//hitstun color
-                  g.setColor(new Color(a.getRed(),a.getBlue(),a.getGreen(),150));
-               }
-               Rect[] rects = plys[i].getHitbox().getBoxes();
-               double vel=plys[i].getVelX();
-               if(vel!=0)
-               {
-                  double drag=0.02;
-                  if(vel>0)
-                     if(vel>drag)//resistance(slow to stop)
-                        plys[i].setVelX(vel-drag);
-                     else
-                        plys[i].setVelX(0);
-                  else
-                     if(vel<(-1*drag))
-                        plys[i].setVelX(vel+drag);
-                     else
-                        plys[i].setVelX(0);
-               }        
-               plys[i].checkVel();//move the player
-               while(collide(plys[i].getHitbox().getBoxes(),level.walls))
-               {
-                  plys[i].getHitbox().offset(0,-.01);
-               }
-               Hitbox floorBox = plys[i].getHitbox();
-               floorBox.offset(0,.01);
-               if(collide(floorBox.getBoxes(),level.walls))
-               {
-                  plys[i].setInAir(false);
-               }
+            case 0:g.setColor(Color.red);
+               break;
+            case 1:g.setColor(Color.blue);
+               break;
+            default:g.setColor(Color.black);
+               break;
+         }
+         if(hitstun>0)
+         {
+            Color a=g.getColor();//hitstun color
+            g.setColor(new Color(a.getRed(),a.getBlue(),a.getGreen(),150));
+         }
+         Rect[] rects = plys[i].getHitbox().getBoxes();
+         double vel=plys[i].getVelX();
+         if(vel!=0)
+         {
+            double drag=5.02;
+            if(vel>0)
+               if(vel>drag)//resistance(slow to stop)
+                  plys[i].setVelX(vel-drag);
                else
-               {
-                  plys[i].setInAir(true);
-               }
-               floorBox.offset(0,-.01);
-               if(plys[i].isInAir())//if not on floor
-               {
-                  plys[i].fall();//gravity
-               }
+                  plys[i].setVelX(0);
+            else
+               if(vel<(-1*drag))
+                  plys[i].setVelX(vel+drag);
                else
-               {
-                  plys[i].setVelY(0);//not gravity(won't fall through floor)
-               }
-               int buffer=50;//buffer space for offscreen blast lines
-               if(plys[i].centerX()<buffer*-1||plys[i].centerX()>getWidth()+buffer||plys[i].centerY()<buffer*-1||plys[i].centerY()>getHeight()+buffer)
-               {//check blast lines
-                  plys[i].hitbox.offsetTo(getWidth()/2,500);//if off screen, reset
-                  plys[i].velY=0;
-                  plys[i].velX=0;
-                  plys[i].damage=0;
-                  deaths[i]++;
-                  plys[i].setHitstun(500);//respawn immunity
+                  plys[i].setVelX(0);
+         }        
+         plys[i].checkVel();//move the player
+         while(collide(plys[i].getHitbox().getBoxes(),level.walls))
+         {
+            plys[i].getHitbox().offset(0,-.01);
+         }
+         Hitbox floorBox = plys[i].getHitbox();
+         floorBox.offset(0,.01);
+         if(collide(floorBox.getBoxes(),level.walls))
+         {
+            plys[i].setInAir(false);
+         }
+         else
+         {
+            plys[i].setInAir(true);
+         }
+         floorBox.offset(0,-.01);
+         if(plys[i].isInAir())//if not on floor
+         {
+            plys[i].fall();//gravity
+         }
+         else
+         {
+            plys[i].setVelY(0);//not gravity(won't fall through floor)
+         }
+         int buffer=50;//buffer space for offscreen blast lines
+         if(plys[i].centerX()<buffer*-1||plys[i].centerX()>getWidth()+buffer||plys[i].centerY()<buffer*-1||plys[i].centerY()>getHeight()+buffer)
+         {//check blast lines
+            plys[i].hitbox.offsetTo(getWidth()/2,500);//if off screen, reset
+            plys[i].velY=0;
+            plys[i].velX=0;
+            plys[i].damage=0;
+            deaths[i]++;
+            plys[i].setHitstun(500);//respawn immunity
                //reduce life count
-               }
-               draw(g,rects);
-               if(plys[i].getAtkUp())
+         }
+         draw(g,rects);
+         if(plys[i].getAtkUp())
+         {
+            Color a=g.getColor();
+            g.setColor(new Color(a.getRed(),a.getBlue(),a.getGreen(),100));
+            draw(g,plys[i].getAtk().getBoxes());
+            for(int q=0;q<plys.length;q++)
+            {
+               if(i!=q)
                {
-                  Color a=g.getColor();
-                  g.setColor(new Color(a.getRed(),a.getBlue(),a.getGreen(),100));
-                  draw(g,plys[i].getAtk().getBoxes());
-                  for(int q=0;q<plys.length;q++)
+                  if(collide(plys[i].getAtk().getBoxes(),plys[q].getHitbox().getBoxes()))
                   {
-                     if(i!=q)
+                     if(plys[q].getHitstun()<=0)
                      {
-                        if(collide(plys[i].getAtk().getBoxes(),plys[q].getHitbox().getBoxes()))
+                        if(i==0)
                         {
-                           if(plys[q].getHitstun()<=0)
-                           {
-                              if(i==0)
-                              {
-                                 plys[q].setVelY(plys[i].getAtkPow(atks[i],keySp,true)[0]*plys[q].getDamage()/30/plys[q].getWeight()*100);
-                                 plys[q].setVelX(plys[i].getAtkPow(atks[i],keySp,true)[1]*plys[q].getDamage()/30/plys[q].getWeight()*100);
-                                 plys[q].addDamage(plys[i].getAtkPow(atks[i],keySp,false)[0]);
-                              }
-                              else
-                              {
-                                 plys[q].setVelY(plys[i].getAtkPow(atks[i],keyZe,true)[0]*plys[q].getDamage()/30/plys[q].getWeight()*100);
-                                 plys[q].setVelX(plys[i].getAtkPow(atks[i],keyZe,true)[1]*plys[q].getDamage()/30/plys[q].getWeight()*100);
-                                 plys[q].addDamage(plys[i].getAtkPow(atks[i],keyZe,false)[0]);
-                              }
-                              plys[q].setHitstun(50);
-                           }
+                           plys[q].setVelY(plys[i].getAtkPow(atks[i],keySp,true)[0]*plys[q].getDamage()/30/plys[q].getWeight()*100);
+                           plys[q].setVelX(plys[i].getAtkPow(atks[i],keySp,true)[1]*plys[q].getDamage()/30/plys[q].getWeight()*100);
+                           plys[q].addDamage(plys[i].getAtkPow(atks[i],keySp,false)[0]);
                         }
+                        else
+                        {
+                           plys[q].setVelY(plys[i].getAtkPow(atks[i],keyZe,true)[0]*plys[q].getDamage()/30/plys[q].getWeight()*100);
+                           plys[q].setVelX(plys[i].getAtkPow(atks[i],keyZe,true)[1]*plys[q].getDamage()/30/plys[q].getWeight()*100);
+                           plys[q].addDamage(plys[i].getAtkPow(atks[i],keyZe,false)[0]);
+                        }
+                        plys[q].setHitstun(50);
                      }
                   }
                }
             }
          }
-         else
-         {
-            for(int i=0;i<plys.length;i++)
-            {
-               switch(i)//color based on player number
-               {
-                  case 0:g.setColor(Color.red);
-                     break;
-                  case 1:g.setColor(Color.blue);
-                     break;
-                  default:g.setColor(Color.black);
-                     break;
-               }
-               if(plys[i].getHitstun()>0)
-               {
-                  Color a=g.getColor();//hitstun color
-                  g.setColor(new Color(a.getRed(),a.getBlue(),a.getGreen(),150));
-               }
-               draw(g,plys[i].getHitbox().getBoxes());
-               Color a=g.getColor();
-               g.setColor(new Color(a.getRed(),a.getBlue(),a.getGreen(),100));
-               if(plys[i].getAtkUp())
-                  draw(g,plys[i].getAtk().getBoxes());
-            }
-         }
-         g.setColor(Color.black);
-         g.setFont(new Font("Arial",0,20));
-         g.drawString(deaths[0]+":"+((int)plys[0].getDamage())+"%",getWidth()/3,getHeight());
-         g.drawString(deaths[1]+":"+((int)plys[1].getDamage())+"%",getWidth()*2/3,getHeight());
       }
+      g.setColor(Color.black);
+      g.setFont(new Font("Arial",0,20));
+      g.drawString(deaths[0]+":"+((int)plys[0].getDamage())+"%",getWidth()/3,getHeight());
+      g.drawString(deaths[1]+":"+((int)plys[1].getDamage())+"%",getWidth()*2/3,getHeight());
       time=System.currentTimeMillis();
+      while(time+FPS>System.currentTimeMillis())
+      {}
       repaint();
    }
    private boolean collide(Rect[] a,Rect[] b)

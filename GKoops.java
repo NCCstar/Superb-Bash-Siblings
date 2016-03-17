@@ -8,7 +8,7 @@ public class GKoops extends Character
    public void jump()
    {
       this.setInAir(true);
-      this.setVelY(-1);
+      this.setVelY(-4);
    }
    public void step(boolean right)
    {

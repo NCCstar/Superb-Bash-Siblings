@@ -1,7 +1,7 @@
 public abstract class Character extends Thing
 {
    public double getGrav(){
-      return (double).007;}
+      return (double).5;}
    public boolean jumped=false;
    public boolean inAir=true;
    public double velY=0;
@@ -136,23 +136,23 @@ public abstract class Character extends Thing
          {
             case 0:
                if(kBack)
-                  return new double[]{-1,0};//up 1
+                  return new double[]{-10,0};//up 1
                return new double[]{4.6};//5%
             case 1:
                if(kBack)
-                  return new double[]{-.5,1.5};//up .5 right 1.5
+                  return new double[]{-5,15};//up .5 right 1.5
                return new double[]{6};//5%
             case 2:
                if(kBack)
-                  return new double[]{1.5,0};//down 1.5
+                  return new double[]{15,0};//down 1.5
                return new double[]{11};//10%
             case 3:
                if(kBack)
-                  return new double[]{-.5,-1.5};//up .5 left 1.5
+                  return new double[]{-5,-15};//up .5 left 1.5
                return new double[]{6};//5%
             case 4:
                if(kBack)
-                  return new double[]{-1,0};//up 1
+                  return new double[]{-10,0};//up 1
                return new double[]{4.3};//5%
          }
       }
@@ -205,8 +205,8 @@ public abstract class Character extends Thing
    }
    public double getVelX()
    {
-      if(velX>5)
-         velX=5;
+      if(Math.abs(velX)>100)
+         velX=100;
       return velX;
    }
    public void setVelX(double vel)
@@ -215,14 +215,13 @@ public abstract class Character extends Thing
    }
    public void step(boolean right)
    {
-      double off=.03;
+      double off=7.0;
       if(!right)
       {
          off*=-1;
       }
-      setVelX(getVelX()+off);
+      velX+=off;
    }
-
    public void fall()
    {
       velY+=getGrav();
@@ -249,7 +248,7 @@ public abstract class Character extends Thing
    public void jump()
    {
       inAir=true;
-      velY=-1.6;
+      velY=-5.6;
    }
    public boolean isInAir()
    {
