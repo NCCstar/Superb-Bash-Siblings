@@ -2,16 +2,16 @@ public abstract class Character extends Thing
 {
    public double getGrav(){
       return (double).007;}
-   private boolean jumped=false;
-   private boolean inAir=true;
-   private double velY=0;
-   private double velX=0;
-   private double damage=0;
-   protected boolean atkUp=false;
-   protected Hitbox atk;
-   private int hitstun=0;
-   protected double weight;
-   protected int atkDir=5;
+   public boolean jumped=false;
+   public boolean inAir=true;
+   public double velY=0;
+   public double velX=0;
+   public double damage=0;
+   public boolean atkUp=false;
+   public Hitbox atk;
+   public int hitstun=0;
+   public double weight;
+   public int atkDir=5;
    public Character(int x,int y,int xDim,int yDim)
    {
       super(new Hitbox(new Rect[]{new Rect(x-xDim/2,y-yDim,x+xDim/2,y)},"char"));
@@ -42,6 +42,10 @@ public abstract class Character extends Thing
    public void setHitstun(int h)
    {
       hitstun=h;
+   }
+   public void subHitstun()
+   {
+      hitstun--;
    }
    public double centerY()
    {

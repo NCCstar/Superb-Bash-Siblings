@@ -3,7 +3,7 @@ public class Spidey extends Character
    public Spidey(int x,int y)
    {
       super(x,y,20,20);
-      weight=110;
+      weight=85;
    }
    public void jump()
    {
@@ -18,5 +18,17 @@ public class Spidey extends Character
          off*=-1;
       }
       setVelX(getVelX()+off);
+   }
+   public void setHitstun(int h)
+   {
+      hitstun=h*2;
+   }
+   public void addDamage(double d)
+   {
+      damage+=d*2;
+   }
+   public void fastFall()
+   {
+      velY+=getGrav()*4;
    }
 }

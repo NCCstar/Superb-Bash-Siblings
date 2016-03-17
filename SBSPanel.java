@@ -1,3 +1,4 @@
+import java.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -26,10 +27,24 @@ public class SBSPanel extends JPanel
    
    public SBSPanel()
    {
-      plys[0]=new Megaman(300,100);
-      plys[1]=new Meteor(700,100);
-      atks[0]=5;
-      atks[1]=5;
+      String chars = "1. Spidey\n2. Megaman\n3. GKoops\n4. Meteor";
+      for(int i=0;i<2;i++)
+      {
+         int sel=Integer.parseInt(JOptionPane.showInputDialog(null,chars,"Choose A Character, Player "+(i+1),JOptionPane.PLAIN_MESSAGE));
+         switch(sel)
+         {
+            case 1:plys[i]=new Spidey(400*i+300,100);
+               break;
+            case 2:plys[i]=new Megaman(400*i+300,100);
+               break;
+            case 3:plys[i]=new GKoops(400*i+300,100);
+               break;
+            case 4:plys[i]=new Meteor(400*i+300,100);
+               break;
+            default:plys[i]=new Bob(400*i+300,100);
+         }
+         atks[i]=5;
+      }
    }
    public void keyPressed(KeyEvent e)
    {
@@ -201,7 +216,7 @@ public class SBSPanel extends JPanel
                int hitstun=plys[i].getHitstun();
                if(hitstun>0)
                {//increment hitstun
-                  plys[i].setHitstun(--hitstun);
+                  plys[i].subHitstun();
                }
                switch(i)//color based on player number
                {
@@ -260,10 +275,10 @@ public class SBSPanel extends JPanel
                int buffer=50;//buffer space for offscreen blast lines
                if(plys[i].centerX()<buffer*-1||plys[i].centerX()>getWidth()+buffer||plys[i].centerY()<buffer*-1||plys[i].centerY()>getHeight()+buffer)
                {//check blast lines
-                  plys[i].getHitbox().offsetTo(getWidth()/2,500);//if off screen, reset
-                  plys[i].setVelY(0);
-                  plys[i].setVelX(0);
-                  plys[i].addDamage(plys[i].getDamage()*-1);
+                  plys[i].hitbox.offsetTo(getWidth()/2,500);//if off screen, reset
+                  plys[i].velY=0;
+                  plys[i].velX=0;
+                  plys[i].damage=0;
                   deaths[i]++;
                   plys[i].setHitstun(500);//respawn immunity
                //reduce life count
