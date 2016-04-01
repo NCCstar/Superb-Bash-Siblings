@@ -7,17 +7,21 @@ public class Spidey extends Character
    }
    public void jump()
    {
-      this.setInAir(true);
-      this.setVelY(-1.6);
+      inAir=true;
+      velY=-7;
    }
    public void step(boolean right)
    {
-      double off=.04;
+      double off=5.6;
       if(!right)
       {
          off*=-1;
       }
-      setVelX(getVelX()+off);
+      velX+=off;
+   }
+   public double getDrag()
+   {
+      return 5;
    }
    public void setHitstun(int h)
    {
@@ -26,6 +30,10 @@ public class Spidey extends Character
    public void addDamage(double d)
    {
       damage+=d*2;
+   }
+   public double getGrav()
+   {
+      return .4;
    }
    public void fastFall()
    {

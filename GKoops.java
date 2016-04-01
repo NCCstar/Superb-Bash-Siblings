@@ -12,11 +12,15 @@ public class GKoops extends Character
    }
    public void step(boolean right)
    {
-      double off=.025;
+      double off=0.2;
       if(!right)
       {
          off*=-1;
       }
-      setVelX(getVelX()+off);
+      velX+=off;
+   }
+   public double getDrag()
+   {
+      return 0.1;
    }
 }

@@ -8,78 +8,47 @@ public class Megaman extends Character
    public void jump()
    {
       this.setInAir(true);
-      this.setVelY(-1.4);
+      this.setVelY(-5);
    }
    public void attack(int dir,boolean light)
    {
       Rect rect=hitbox.getBoxes()[0];
-      if(light)
+      switch(dir)
       {
-         switch(dir)
-         {
-            case 0://different for each fighter
-               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-15,rect.getTop()-30,rect.getRight()+15,rect.getTop())},"atk");
-               atkUp=true;
-               atkDir=0;
-               break;
-            case 1:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop()+10,rect.getRight()+500,rect.getBottom()-10)},"atk");
+         case 0://different for each fighter
+            atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-15,rect.getTop()-30,rect.getRight()+15,rect.getTop())},"atk");
+            atkUp=true;
+            atkDir=0;
+            break;
+         case 1:
+               atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop(),rect.getRight()+rect.getWidth(),rect.getBottom())},"atk");
                atkUp=true;
                atkDir=1;
                break;
-            case 2:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getBottom()+1,rect.getRight(),rect.getBottom()+rect.getHeight()+1)},"atk");
-               atkUp=true;
-               atkDir=2;
-               break;
-            case 3:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-500,rect.getTop()+10,rect.getLeft(),rect.getBottom()-10)},"atk");
+         case 2:
+            atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getBottom()+1,rect.getRight(),rect.getBottom()+rect.getHeight()+1)},"atk");
+            atkUp=true;
+            atkDir=2;
+            break;
+         case 3:
+               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-rect.getWidth(),rect.getTop(),rect.getLeft(),rect.getBottom())},"atk");
                atkUp=true;
                atkDir=3;
                break;
-            case 4:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-rect.getWidth()/4,rect.getTop()-rect.getHeight()/4,rect.getRight()+rect.getWidth()/4,rect.getBottom()+rect.getHeight()/4)},"atk");
-               atkUp=true;
-               atkDir=4;
-               break;
-            default: 
-               atk=null;
-               atkUp=false;
-               atkDir=5;
-               break;
-         }
-      }
-      else
-      {
-         switch(dir)
-         {
-            case 0://different for each fighter
-               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getTop()-rect.getHeight(),rect.getRight(),rect.getTop())},"atk");
-               atkUp=true;
-               break;
-            case 1:
+         case 4:
+            if(goRight)
                atk=new Hitbox(new Rect[]{new Rect(rect.getRight(),rect.getTop()+10,rect.getRight()+500,rect.getBottom()-10)},"atk");
-               atkUp=true;
-               break;
-            case 2:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft(),rect.getBottom()+1,rect.getRight(),rect.getBottom()+rect.getHeight()+1)},"atk");
-               atkUp=true;
-               break;
-            case 3:
+            else
                atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-500,rect.getTop()+10,rect.getLeft(),rect.getBottom()-10)},"atk");
-               atkUp=true;
-               break;
-            case 4:
-               atk=new Hitbox(new Rect[]{new Rect(rect.getLeft()-rect.getWidth()/4,rect.getTop()-rect.getHeight()/4,rect.getRight()+rect.getWidth()/4,rect.getBottom()+rect.getHeight()/4)},"atk");
-               atkUp=true;
-               break;
-            default: 
-               atk=null;
-               atkUp=false;
-               break;
-         }
-            
-      }
+            atkUp=true;
+            atkDir=4;
+            break;
+         default: 
+            atk=null;
+            atkUp=false;
+            atkDir=5;
+            break;
+      }  
    }
    public double[] getAtkPow(int dir,boolean light,boolean kBack)
    {

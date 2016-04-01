@@ -8,7 +8,7 @@ public class Meteor extends Character
    public void jump()
    {
       this.setInAir(true);
-      this.setVelY(-1.2);
+      this.setVelY(-5);
    }
    public double[] getAtkPow(int dir,boolean light,boolean kBack)
    {

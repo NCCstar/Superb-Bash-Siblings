@@ -1,7 +1,5 @@
 public abstract class Character extends Thing
 {
-   public double getGrav(){
-      return (double).5;}
    public boolean jumped=false;
    public boolean inAir=true;
    public double velY=0;
@@ -12,6 +10,7 @@ public abstract class Character extends Thing
    public int hitstun=0;
    public double weight;
    public int atkDir=5;
+   public boolean goRight=true;
    public Character(int x,int y,int xDim,int yDim)
    {
       super(new Hitbox(new Rect[]{new Rect(x-xDim/2,y-yDim,x+xDim/2,y)},"char"));
@@ -215,12 +214,22 @@ public abstract class Character extends Thing
    }
    public void step(boolean right)
    {
-      double off=7.0;
+      double off=1.2;
+      goRight=true;
       if(!right)
       {
+         goRight=false;
          off*=-1;
       }
       velX+=off;
+   }
+   public double getDrag()
+   {
+      return 1;
+   }
+   public double getGrav()
+   {
+      return .3;
    }
    public void fall()
    {
@@ -248,7 +257,7 @@ public abstract class Character extends Thing
    public void jump()
    {
       inAir=true;
-      velY=-5.6;
+      velY=-6;
    }
    public boolean isInAir()
    {

@@ -21,14 +21,14 @@ public class SBSPanel extends JPanel
    private int deaths[]=new int[2];
    
    private long time=System.currentTimeMillis();
-   private double FPS=30;
+   private final int FPS=120;
+   private final double MSPF=1.0/FPS*1000;
    
    private Level level=new Level();
    private Character[] plys=new Character[2];
    
    public SBSPanel()
    {
-      FPS=1/FPS*1000;
       String chars = "1. Spidey\n2. Megaman\n3. GKoops\n4. Meteor";
       for(int i=0;i<2;i++)
       {
@@ -234,7 +234,7 @@ public class SBSPanel extends JPanel
          double vel=plys[i].getVelX();
          if(vel!=0)
          {
-            double drag=5.02;
+            double drag=plys[i].getDrag();
             if(vel>0)
                if(vel>drag)//resistance(slow to stop)
                   plys[i].setVelX(vel-drag);
@@ -319,7 +319,7 @@ public class SBSPanel extends JPanel
       g.drawString(deaths[0]+":"+((int)plys[0].getDamage())+"%",getWidth()/3,getHeight());
       g.drawString(deaths[1]+":"+((int)plys[1].getDamage())+"%",getWidth()*2/3,getHeight());
       time=System.currentTimeMillis();
-      while(time+FPS>System.currentTimeMillis())
+      while(time+MSPF>System.currentTimeMillis())
       {}
       repaint();
    }
